@@ -1,0 +1,329 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Nodejs API project",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:4005/"
+        }
+    ],
+    "paths": {
+        "/v1/getAllMovie": {
+            "get": {
+                "tags": [
+                    "get"
+                ],
+                "summary": "Listing the available Movies",
+                "description": "",
+                "operationId": "getmovies",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Maximum number of page to return in a single request",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Maximum number of movies to return in a single request",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "10"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "*if send page and limit is string*\n",
+                        "content": {
+                            "/application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FailOps400"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/getMovieById/{movieId}": {
+            "get": {
+                "tags": [
+                    "get"
+                ],
+                "summary": "Get the movie details in that particular Id",
+                "description": "",
+                "operationId": "getmovie",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "Returing the MovieDetails by using id ",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "e144c088-6996-4108-8102-470edbd6119d"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "*if send the wrongId *\n",
+                        "content": {
+                            "/application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FailOps400"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/searchByName": {
+            "get": {
+                "tags": [
+                    "get"
+                ],
+                "summary": "Get the movie details searchByName ",
+                "description": "",
+                "operationId": "GetMoviebyTheName",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Returing the MovieDetails by using movieName ",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Transporter"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "*if send the wrongname *\n",
+                        "content": {
+                            "/application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FailOps400"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/deleteMoiveId/{movieId}": {
+            "patch": {
+                "tags": [
+                    "patch"
+                ],
+                "summary": "Delete the movie details in that particular Id",
+                "description": "",
+                "operationId": "deletemovie",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "Delete the MovieDetails by using id ",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "e144c088-6996-4108-8102-470edbd6119d"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "*if send the wrongId *\n",
+                        "content": {
+                            "/application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FailOps400"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/movieUpdate/{movieId}": {
+            "patch": {
+                "tags": [
+                    "patch"
+                ],
+                "summary": "update the movie details in that particular Id",
+                "description": "",
+                "operationId": "Updatemovie",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "Update the MovieDetails by using id ",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "e144c088-6996-4108-8102-470edbd6119d"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "isRunning": {
+                                        "type": "string",
+                                        "example": "yes"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "*if send the wrongId *\n",
+                        "content": {
+                            "/application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FailOps400"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "recordCount": {
+                "description": "Successfull operation",
+                "properties": {
+                    "movie": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "code": {
+                        "type": "integer",
+                        "example": "200"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Successfully"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "_id": {
+                                                "type": "string",
+                                                "example": ""
+                                            },
+                                            "count": {
+                                                "type": "integer",
+                                                "example": "10"
+                                            }
+                                        }
+                                    }
+                                },
+                                "recordsCount": {
+                                    "type": "integer",
+                                    "example": "10"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "FailOps400": {
+                "description": "The HTTP 404 Not Found response status code indicates that the server cannot find the requested resource.",
+                "properties": {
+                    "operationId": {
+                        "type": "string",
+                        "example": "4f1f427f-e7f9-4530-974d-9a2dc0ae59cd"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "example": 1178
+                    },
+                    "data": {
+                        "type": "object",
+                        "example": null
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid request, please check the request and try again, resource not found."
+                    }
+                }
+            }
+        }
+    }
+}
